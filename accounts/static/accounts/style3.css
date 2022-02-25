@@ -1,0 +1,96 @@
+.all_accounts {
+    margin-top: 50px;
+}
+.all_accounts .box .all_accounts_title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.all_accounts .box .all_accounts_title h3 {
+    font-size: 37px;
+    font-weight: 600;
+
+}
+.all_accounts .box .all_accounts_title h3 p {
+    color: #7a7575;
+    font-size: 17px;
+    font-weight: 200;
+}
+.all_accounts_title ul {
+    padding: 5px 10px;
+    width: 200px;
+}
+.all_accounts_title ul li a {
+    color: black;
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    padding: 2px 3px;
+}
+.all_accounts_title ul li a:hover {
+    background-color: #efeded;
+}
+.accounts_info {
+    display: flex;
+}
+.sort {
+    width: 20%;
+}
+.sort h2 {
+    font-weight: 500;
+    margin-bottom: 21px;
+}
+.sort a {
+    display: block;
+    color: black;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+}
+.sort a:hover {
+    background-color: #efeded;
+}
+
+
+
+/* start accounts */
+.account {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.accounts_info .account .account_body {
+    max-height: 350px;
+    width: 32%;
+    max-width: 32%;
+    height: 350px;
+    padding: 10px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    margin-top: 20px;
+    transition: .3s;
+    transform: scale(.95);
+
+}
+.account .account_body:hover {
+    transform: scale(1);
+}
+
+.account .account_body img {
+    max-height: 60%;
+    height: 60%;
+    width: 100%;
+    max-width: 100%;
+}
+.account .account_body p {
+    margin: 5px 0 5px 0;
+    font-size: 20px;
+    font-weight: 400;
+}
+.account .account_body a {
+    background-color: var(--main);
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+}
+/* end accounts */

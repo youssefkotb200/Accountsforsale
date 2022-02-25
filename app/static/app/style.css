@@ -1,0 +1,302 @@
+
+/* start login */
+.account_url {
+    color: blue;
+    text-decoration: underline;
+}
+.account_url:hover {
+     color: blue;
+}
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+.login .box {
+    width: 520px;
+    background-color: #eee;
+    border-radius: 20px;
+    border: 2px solid black
+}
+.login .box .login_title {
+    font-size: 30px;
+    text-align: center;
+    color: var(--main);
+    margin: 0 0 20px 0;
+    font-weight: bold;
+}
+.login .box .login_form {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.login .box .login_form input[type=submit] {
+    width: 100%;
+    padding: 5px;
+    background-color: var(--main);
+    border: none;
+    color: white;
+    margin-bottom: 30px;
+    margin-top: 30px;
+} 
+/* ?end login */
+/* start main body */
+.main .box {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 0;
+}
+.main_info {
+    height: 450px;
+    width: 25%;
+}
+.main_info .box_img {
+    position: relative;
+    height: 100%;
+}
+  
+.main_info .box_img .image {
+    opacity: 1;
+    display: block;
+    height: 100%;
+    max-width: 100%;
+    transition: .5s ease;
+    backface-visibility: hidden;
+}
+
+.main_info .box_img .middle {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.main_info .box_img:hover .image {
+    opacity: 0.3;
+}
+
+.main_info .box_img:hover .middle {
+    opacity: 1;
+    width: 400px;
+    min-width: 400px;
+}
+
+.main_info .box_img .middle  .text {
+    color: black;
+    font-size: 16px;
+    padding: 16px 32px;
+    font-weight: 400;
+}
+.main_info .box_img .middle  .text a {
+    text-decoration: none;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: var(--main);
+}
+.main_info .post {
+    width: 100%;
+    height: 105px;
+    position: relative;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+.main_info .post:hover {
+    opacity: 0.6;
+
+}
+.main_info .post:hover .post-s {
+    width: 100%;
+}
+.main_info .post img {
+    display: block;
+    width: 100%;
+    height: 105px;
+}
+.main_info .post-s{ 
+    width: 0px;
+    height: 105px;
+    opacity: 0.3;
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: 0.7s ease;
+}
+.main_info .post-s a {
+    text-decoration: none;
+    color: white;
+    font-size: 40px;
+    padding: 10px 30px;
+}
+  
+  
+/* end main body */
+/* start trending products */
+.section_title_main {
+    margin: 50px 0 50px 0;
+}
+.section_title_main .box {
+    color: white;
+    background-color: black;
+    padding: 10px 0 10px 0;
+    text-align: center;
+}
+.section_title_main .box h3 {
+    font-weight: 600;
+    font-size: 30px;
+}
+.section_title_1 {
+    margin: 30px 0 10px 0;
+}
+.section_title_1 .box h3 {
+    font-weight: 600;
+    font-size: 30px;
+}
+.trending_products .box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 100px;
+}
+.trending_products .box .products {
+    display: flex;
+    overflow-x: auto;
+}
+.box .products .product_body {
+    max-height: 400px;
+    margin-left: 5px;
+    min-width: 25%;
+    margin-bottom: 10px;
+    transition: .3s;
+    transform: scale(.95);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 5px 10px;
+}
+.box .products .product_body:hover {
+    transform: scale(1);
+}
+.box .products .product_body img {
+    max-height: 60%;
+    max-width: 100%;
+    width: 100%;
+    margin-bottom: 10px;
+    border: 1px sollid black;
+    height: 60%;
+}
+.box .products .product_body p {
+    font-weight: 600;
+}
+.box .products .product_body a {
+    text-decoration: none;
+    color: white;
+    background-color: var(--main);
+    padding: 5px 10px;
+    border-radius: 5px;
+    
+}
+.arrow {
+    height: 100px;
+    display: flex;
+    width: 69px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    background-color: #e7e7e7;
+    margin: 0 5px 0 5px;
+}
+.arrow:hover {
+    cursor: pointer;
+    background-color: #c5c1c1;
+}
+.products::-webkit-scrollbar {
+    height: 5px;
+    width: 2px;
+    border: 1px sole grey;
+    background-color: grey;
+}
+.products::-webkit-scrollbar-track {
+    --webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3)
+}
+.products::-webkit-scrollbar-thumb {
+    background-color: var(--main);
+}
+/* end trending products */
+/* start deals */
+.deals .box {
+    display: flex;
+    justify-content: space-between;
+}
+.section_title_1 .box {
+    display: block;
+}
+.deals .box .game_info_2 {
+    display: flex;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    max-height: 160px;
+    height: 160px;
+}
+.deals .box .game_info_2 img {
+   height: 100%;
+   width: 30%;
+   max-width: 30%;
+   max-height: 100%;
+}
+.deals .box .game_info_2 .game_details {
+    margin-left: 10px;
+}
+.deals .box .game_info_2 .game_details p {
+    font-weight: 600;
+}
+.deals .box .game_info_2 .game_details a {
+    text-decoration: none;
+    color: white;
+    background-color: var(--main);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+.deal {
+    max-width: 33%;
+}
+/* end deals */
+
+
+/* start cheapest_products */
+.cheapest_products {
+    margin-bottom: 50px;
+}
+.cheapest_products .box {
+    display: flex;
+    justify-content: space-between;
+}
+.cheapest_products .box .price_starting {
+    border: 1px solid black;
+    padding: 10px 20px 10px 20px;
+    transition: .3s;
+    cursor: pointer;
+    transform: scale(1);
+}
+.cheapest_products .box .price_starting:hover {
+    background-color: #eee;
+    transform: scale(.95);
+}
+.cheapest_products .box .price_starting h3 {
+    font-size: 20px;
+}
+.cheapest_products .box .price_starting h3 a {
+    color: black;
+    text-decoration: none;
+}
+
+/* end cheapest_products */

@@ -1,0 +1,287 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="{% static 'main/style.css' %}" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Montserrat:wght@200;300;500;600&family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <title>Accounts For Sale</title>
+        {% block scripts %} {% endblock %}
+        <style>
+            .dropdown-menu.show {
+                display: flex;
+                flex-wrap: wrap;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="box">
+                <div class="head">
+                    <a href="/" class="logo url">
+                        <span class="first">A</span>
+                        <span class="second">F</span>
+                        <span class="third">S</span>
+                    </a>
+                    <form action='{% url "search" %}' class="search">
+                        <input type="text" placeholder="Search for Accounts" class="search_bar search_item" name="Keyword">
+                        <button type="submit" class="search_icon search_item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="100%" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                            </svg>
+                        </button>
+                    </form>
+                    <div class="user">
+                        <a class="nav_bar_icon_url" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {% if request.user.avatar %}
+                                <img class="navbar_icon" style="max-width:100%;border-radius: 50%;" src="{{ request.user.avatar.url }}">
+                            {% else %}
+                                <svg class="navbar_icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                                </svg>
+                            {% endif %}
+                        </a>
+                        <ul style="width: 355px;" class="dropdown-menu">
+                            <li style="width: 32%"><a style="max-width: 100%;" href="{% url 'change_avatar' avatar_url='avatar1.jpg' %}"><img style="max-width: 100%;" src="../media/avatars/avatar1.jpg"></a></li>
+                            <li style="width: 32%"><a style="max-width: 100%;" href="{% url 'change_avatar' avatar_url='avatar2.png' %}"><img style="max-width: 100%;" src="../media/avatars/avatar2.png"></a></li>
+                            <li style="width: 32%"><a style="max-width: 100%;" href="{% url 'change_avatar' avatar_url='avatar8.jpeg' %}"><img style="max-width: 100%;" src="../media/avatars/avatar8.jpeg"></a></li>
+                            <li style="width: 32%"><a style="max-width: 100%;" href="{% url 'change_avatar' avatar_url='avatar4.png' %}"><img style="max-width: 100%;" src="../media/avatars/avatar4.png"></a></li>
+                            <li style="width: 32%"><a style="max-width: 100%;" href="{% url 'change_avatar' avatar_url='avatar5.jpg' %}"><img style="max-width: 100%;" src="../media/avatars/avatar5.jpg"></a></li>
+                            <li style="width: 32%"><a style="max-width: 100%;" href="{% url 'change_avatar' avatar_url='avatar7.png' %}"><img style="max-width: 100%;" src="../media/avatars/avatar7.png"></a></li>
+                        </ul>
+                        <div class="login_options">
+                            {% if request.user.is_authenticated %}
+                                <a href="{% url 'dashboard' %}">{{ request.user.username }}</a>
+                                <strong>/</strong>
+                                <a href="{% url 'logout_view' %}">log out</a>
+                            {% else %}
+                                <a href="{% url 'register' %}">register</a>
+                                <strong>/</strong>
+                                <a href="{% url 'login_view' %}">log in</a>
+                            {% endif %}
+                        </div>
+                        <a class="nav_bar_icon_url cart_icon" href="{% url 'cart' %}">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                            </svg>
+                            <span class="cart_count">{{ cart }}</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="nav-bar">
+            <div class="box">
+                <a href="#" class="option" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+                    <svg style="color:white; margin-right: 30px" xmlns="http://www.w3.org/2000/svg"  fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                    </svg>
+                    <p class="option_title option_i"> More options</p>
+                </a>
+                <div class="offcanvas offcanvas-start" style="width: 300px" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+                    <div class="offcanvas-header">
+                        {% if request.user.is_authenticated %}
+                            <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Hello, {{ request.user.username }} </h5>
+                        {% else %}
+                            <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Hello, Guest </h5>
+                        {% endif %}
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body" style="padding:0">
+                        <p class="sec_title">Our Categories</p>
+                        {% for category in categories %}
+                            <a href="{% url 'account_categories' slug_name=category.slug %}" class="section">
+                                {{ category.name }}
+                            </a>
+                        {% endfor %}
+                        <p class="sec_title">Profile</p>
+                        <a href="{% url 'dashboard' %}" class="section">
+                            My Account
+                        </a>
+                        {% if request.user.is_authenticated %}
+                            <a href="{% url 'logout_view' %}" class="section">
+                                Log out
+                            </a>
+                        {% else %}
+                            <a href="{% url 'login_view' %}" class="section">
+                                Log in
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+                <a href="{% url 'accounts' option='bestseller' %}" class="option">
+                    <p class="option_title option_i">Best seller</p>
+                </a>
+                <a href="{% url 'accounts' option='Trending' %}" class="option">
+                    <p class="option_title option_i">Trending products</p>
+                </a>
+                <a href="{% url 'accounts' option='allaccounts' %}" class="option">
+                    <p class="option_title option_i">All Accounts</p>
+                </a>
+            </div>
+        </div>
+        {% if messages %}
+            <div style="margin: 10px 102px;" class="messages">
+                {% for message in messages %}
+                    {% if message.tags == 'error' %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display: flex;justify-content: space-between;align-items: center; height: 61px;">
+                            {{ message }}
+                            <a type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true"style="color: black; font-size: 26px;">&times;</span>
+                            </a>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-success alert-dismissible fade show" role="alert" style="display: flex;justify-content: space-between;align-items: center; height: 61px;">
+                            {{ message }}
+                            <a type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true"style="color: black; font-size: 26px;">&times;</span>
+                            </a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% block body %} {% endblock %}
+        <!-- Footer -->
+    <footer class="text-center text-lg-start bg-light text-muted">
+        <!-- Section: Social media -->
+        <section
+        class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
+        >
+            <!-- Left -->
+            <div class="me-5 d-none d-lg-block">
+                <span>Get connected with us on social networks:</span>
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+            <!-- Left -->
+        
+            <!-- Right -->
+            <div>
+                <a href="" class="me-4 text-reset">
+                    <i class="bi bi-facebook"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="bi bi-twitter"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="bi bi-google"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="bi bi-instagram"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="bi bi-linkedin"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                    <i class="bi bi-github"></i>
+                </a>
+            </div>
+            <!-- Right -->
+        </section>
+        <!-- Section: Social media -->
+    
+        <!-- Section: Links  -->
+        <section class="">
+            <div class="container text-center text-md-start mt-5">
+                <!-- Grid row -->
+                <div class="row mt-3">
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <!-- Content -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                        <i class="fas fa-gem me-3"></i>Company name
+                        </h6>
+                        <p>
+                        Here you can use rows and columns to organize your footer content. Lorem ipsum
+                        dolor sit amet, consectetur adipisicing elit.
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+            
+                    <!-- Grid column -->
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                        Products
+                        </h6>
+                        <p>
+                        <a href="#!" class="text-reset">Angular</a>
+                        </p>
+                        <p>
+                        <a href="#!" class="text-reset">React</a>
+                        </p>
+                        <p>
+                        <a href="#!" class="text-reset">Vue</a>
+                        </p>
+                        <p>
+                        <a href="#!" class="text-reset">Laravel</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+            
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                        Useful links
+                        </h6>
+                        <p>
+                        <a href="#!" class="text-reset">Pricing</a>
+                        </p>
+                        <p>
+                        <a href="#!" class="text-reset">Settings</a>
+                        </p>
+                        <p>
+                        <a href="#!" class="text-reset">Orders</a>
+                        </p>
+                        <p>
+                        <a href="#!" class="text-reset">Help</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+            
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                        Contact
+                        </h6>
+                        <p><i class="bi bi-house-fill"></i> New York, NY 10012, US</p>
+                        <p>
+                        <i class="bi bi-envelope-fill"></i>
+                        info@example.com
+                        </p>
+                        <p><i class="bi bi-telephone-fill"></i> + 01 234 567 88</p>
+                        <p><i class="bi bi-telephone-fill"></i>+ 01 234 567 89</p>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+            </div>
+        </section>
+        <!-- Section: Links  -->
+    
+        <!-- Copyright -->
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+            © 2021 Copyright:
+            <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+    <!-- Back to top button -->
+    <button type="button" class="btn-floating btn-lg" id="btn-back-to-top" style="color: white; border: none; outline: none; background-color: var(--main)">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+    </body>
+</html>

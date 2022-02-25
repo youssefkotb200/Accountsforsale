@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block scripts %}
+    <link rel="stylesheet" href="{% static 'accounts/style3.css' %}">
+    <script src="{% static 'accounts/script2.js' %}"></script>
+{% endblock %}
+{% block body %}
+<div class="all_accounts">
+    <div class="box">
+        <div class="all_accounts_title">
+            <h3>
+                {% if 'search' in request.path %}
+                    Search For {{ keyword }}
+                {% else %}
+                    Games
+                {% endif %}
+                <p>{{ Items_found }} Accounts Found</p>
+            </h3>
+            <div class="btn-group">
+                <button type="button" style="background-color: rgb(33, 33, 33);border: none;" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    Sort By
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="?sort=l2h">Price-Lowest First</a></li>
+                    <li><a href="?sort=h2l">Price-Highest First</a></li>
+                    <li><a href="?sort=rd">Release Date</a></li>
+                </ul>
+            </div> 
+        </div>
+        <div class="accounts_info">
+            <div class="sort">
+                <h2>Categories</h2>
+                {% for category in categories %}
+                    <a href="{% url 'account_categories' slug_name=category.slug %}">{{ category.name }}</a>
+                {% endfor %}
+            </div>
+            <section class="account">
+                {% for account in page_obj %}
+                    <div class="account_body">
+                        <img src="{{ account.account_img.url }}">
+                        <p>{{ account.title }}</p>
+                        <p>{{ account.options }}</p>
+                        <p>{{ account.price }}$</p>
+                        <a href="{% url  'account' acc_id=account.id %}">View Product</a>
+                    </div>
+                {% endfor %}
+            </section>
+        </div>
+        <nav aria-label="Page navigation example" style="display: flex; justify-content: flex-end; margin: 30px 50px 10px 10px;">
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}">Previous</a></li>
+                {% endif %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.number }}"> {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</a></li>
+                {% if page_obj.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number }}">Next</a></li>
+                {% endif %}
+            </ul>
+          </nav>
+    </div>
+</div>
+{% endblock %}

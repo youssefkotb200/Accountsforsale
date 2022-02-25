@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block scripts %}
+    <link rel="stylesheet" href="{% static 'cart/cart.css' %}">
+{% endblock %}
+{% block body %}
+<div class="box">
+    <h3 class="cart_title">Accounts</h3>
+</div>
+<div class="cart">
+    <div class="box">
+        <div class="cartitems">
+            {% for i in cartitems %}
+                <div class="cartitem">
+                    <img src="{{ i.account_id.account_img.url }}">
+                    <div class="item_info">
+                        <p>{{ i.account_id.title}}</p>
+                        <p><strong>Price:</strong>{{ i.account_id.price }}$</p>
+                    </div>
+                    <a href="{% url 'remove_from_cart' account_id=i.account_id.pk %}" class="btn btn-danger" >Remove</a> 
+                </div>
+            {% endfor %}
+        </div>
+        <div class="checkout">
+            <p><strong>Total price:</strong> {{ Total_price }}$</p>
+            <p><strong>Tax:</strong> {{ tax }}$</p>
+            <p><strong>Grand Total:</strong> {{ Grand_total }}$</p>
+            <img src="../../../media/images/payments.png">
+            <a class="btn btn-primary" href="{% url 'checkout' %}">Check out</a>
+            <a class="btn btn-light" href="{% url 'accounts' option='allaccounts' %}">Continue Shopping</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

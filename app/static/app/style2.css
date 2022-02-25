@@ -1,0 +1,76 @@
+/* start game */
+.game .box {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+.game .box .game_part_1 {
+    max-width: 30%;
+    max-height: 100%;
+    width: 35%;
+    height: 400px;
+}
+.game .box .game_part_1 .game_img_1 {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+.game .box .game_part_1 .game_title_1 {
+    font-weight: 600;
+    font-size: 40px;
+    margin-bottom: 25px;
+}
+.game .box .game_part_1  .sell_options_1 {
+    display: flex;
+    flex-wrap: wrap;
+}
+.game .box .game_part_1  .sell_options_1 p {
+    width: 50%;
+}
+.game .box .game_part_1  .sell_options_1 p strong {
+    color: black;
+}
+.game .box .game_part_1 .seller_info img {
+    width: 20%;
+    height: 20%;
+    max-width: 20%;
+    max-height: 20%;
+}
+.game .box .game_part_1  .seller_info {
+    display: flex;
+    align-items: center;
+    position: relative;
+    border-radius: 10px;
+}
+.game .box .game_part_1  .seller_info::before {
+    content: "Seller info";
+    position: absolute;
+    top: -29%;
+    font-weight: 600;
+}
+.game .box .game_part_1  .seller_info p {
+    font-weight: 600;
+    margin-left: 15px;
+}
+.game_price_1 {
+    margin: 15px 0 15px 0;
+}
+.game_price_1 strong {
+    color: #666161;
+    font-size: 20px;
+}
+.game_price_1 span {
+    display: block;
+    font-size: 43px;
+    margin-left: 10px;
+    font-weight: 600;
+}
+.game .box .game_part_1  a {
+    width: 100%;
+    margin: 0 0 10px 0;
+    display: block;
+}
+/* end game */

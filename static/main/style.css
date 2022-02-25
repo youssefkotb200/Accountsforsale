@@ -1,0 +1,176 @@
+:root {
+    --main: rgb(47, 130, 251);
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Cairo', sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+.url {
+    text-decoration: none;
+    color: white;
+}
+.box {
+    padding: 5px 35px 5px 35px;
+}
+#btn-back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+}
+
+/* start header */
+header {
+    background-color: black;
+}
+.head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px 20px 30px;
+}
+.logo {
+    font-size: 40px;
+    font-weight: 600;
+}
+.logo .first {
+    color: orange;
+}
+.logo .second {
+    color: white;
+}
+.logo .third {
+    color: var(--main);
+}
+.search {
+    height: 50px;
+    border-radius: 10px;
+    width: 459px;
+    display: flex;
+}
+.search_bar {
+    width: 90%;
+    padding: 0 20px 0 20px;
+}
+.search_icon {
+    width: 10%;
+    background-color: rgb(47, 130, 251);;
+    color: white;
+}
+.search .search_item {
+    height: 100%;
+    border: none;
+    outline: none;
+}
+.user {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 300px
+}
+.user .nav_bar_icon_url {
+    font-size: 18px;
+    color: white;
+    text-decoration: none;
+    width: 40px;
+}
+.cart_icon {
+    position: relative;
+}
+.cart_count {
+    position: absolute;
+    top: -58%;
+    background-color: white;
+    border-radius: 50%;
+    width: 30px;
+    color: black;
+    text-align: center;
+}
+.login_options a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+}
+strong {
+    color: white;
+}
+.nav-bar {
+    background-color: black;
+}
+.nav-bar .box {
+    padding-top: 10px;
+    padding-bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    height: 56px;
+}
+
+.nav-bar .box .option {
+    color: white;
+    text-decoration: none;
+    background-color: rgb(33, 33, 33);
+    display: flex;
+    padding: 10px 20px;
+    border-radius: 3px;
+    width: 300px;
+}
+.nav-bar .box .option:hover {
+    background-color: rgb(55, 55, 55);
+}
+.nav-bar .box .option .option_icon {
+    width: 30px;
+}
+.nav-bar .box a {
+    text-decoration: none;
+    font-size: 18px;
+}
+.nav-bar .box a:hover {
+    cursor: pointer;
+}
+.offcanvas-header {
+    background-color: rgb(33, 33, 33);
+    color: white;
+    text-align: center;
+}
+.option_i {
+    color: white;
+}
+.section {
+    padding: 10px 5px 10px 10px;
+    display: block;
+    font-weight: 200;
+    font-size: 20px;
+    color: black;
+    margin-bottom: 20px;
+}
+.section:hover {
+    color: black;
+}
+.sec_title {
+    padding: 10px 10px 6px 10px;
+    font-weight: 600;
+    border-top: 1px solid black;
+    font-size: 20px;
+}
+.section .sec_info {
+    text-decoration: none;
+    color: black;
+}
+.section:hover {
+    background-color: #d9d3d3;;
+}
+.add_account {
+    background-color: var(--main);
+    border-radius: 10px;
+    color: white;
+    padding: 5px 5px;
+}
+.add_account:hover {
+    cursor: pointer;
+    color: white;
+}
+/* end header */

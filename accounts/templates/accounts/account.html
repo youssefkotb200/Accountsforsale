@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block scripts %}
+    <link rel="stylesheet" href="{% static 'app/style2.css' %}">
+    <link rel="stylesheet" href="{% static 'app/style.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/style3.css' %}">
+{% endblock %}
+{% block body %}
+<div class="game">
+    <div class="box">
+        <div class="game_part_1">
+            <img class="game_img_1" src="{{ account.0.account_img.url }}">
+        </div>
+        <div class="game_part_1">
+            <h2 class="game_title_1">{{ account.0.title }}</h2>
+            <div class="sell_options_1">
+                <p><strong>Platform:</strong> {{account.0.category}} </p>
+                <p><strong>Selling Options:</strong> {{ account.0.options }}</p>
+                <p><strong>Type:</strong> Account</p>
+            </div>
+        </div>
+        <div class="game_part_1">
+            <div class="seller_info">
+                <img src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png">
+                <p>{{ account.0.owner.username }}</p>
+            </div>
+            <p class="game_price_1"><strong>Price:</strong> <span>{{account.0.price}}$</span></p>
+            {% if In_cart %}
+                <a class="btn btn-success">Added To Cart</a>
+            {% else %}
+                <a href="{% url 'add_to_cart' account_id=account.0.pk %}" class="btn btn-primary">Add To Cart</a>
+            {% endif %}
+            {% if account.0.options != 'sell' %}
+                <a type="button" class="btn btn-primary">Send Trade Request</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="section_title_main">
+    <div class="box">
+        <h3>Equivalent Products</h3>
+        <p>See The Equivalent Products for this Product</p>
+    </div>
+</div>
+
+
+
+
+<div class="accounts_info">
+    <div class="box">
+        <div class="account" style="width: 100%;">
+            {% for game in equivalent_games %}
+                <div class="account_body" style="width: 25%;">
+                    <img src="{{ game.account_img.url }}">
+                    <p>{{ game.title }}</p>
+                    <p>{{ game.price }}$</p>
+                    <p>{{ game.options }}</p>
+                    <a href="{% url 'account' acc_id=game.pk %}">View Product</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

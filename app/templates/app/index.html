@@ -1,0 +1,221 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block scripts %}
+    <link rel="stylesheet" href="{% static 'app/style.css' %}">
+    <script src="{% static 'app/script.js'%}"></script>
+{% endblock %}
+{% block body %}
+<main class="main">
+    <div class="box">
+        <div class="main_info" style="margin-right: 20px">
+            {% for category in categories %}
+                {% if category.name == 'Epic games' %}
+                {% else %}
+                    <div class="post">
+                        <img style="max-width: 100%;" src="{{ category.category_img.url }}" alt="">
+                        <div class="post-s">
+                            <a href="{% url 'account_categories' slug_name=category.slug %}">
+                                {{ category.name }}
+                            </a>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="main_info">
+            <div class="box_img">
+                <img src="https://image.api.playstation.com/vulcan/ap/rnd/202007/3011/XX85ZND1RuA13iphoE1Qb7ex.png" class="image" style="width:100%">
+                <div class="middle" style="width: 100%;">
+                    <div class="text">
+                        <p>Any Game You Want</p>
+                        <a href="{% url 'accounts' option='allaccounts' %}">Browse Games</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main_info">
+            <div class="box_img">
+                <img src="https://cdn1.epicgames.com/salesEvent/salesEvent/EGS_DyingLight2StayHuman_Techland_S4_1200x1600-b3d66b4576fd6488b674710e13493435" class="image" style="width:100%">
+                <div class="middle" style="width: 100%; max-width: 100%;">
+                  <div class="text">
+                      <p>Enjoy The Game After Buying It</p>
+                      <a href="{% url 'accounts' option='allaccounts' %}">Browse Games</a>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="main_info">
+            <div class="box_img">
+                <img src="https://assets1.ignimgs.com/2017/08/11/days-gone---button-2-1502413280476.jpg" class="image" style="width:100%">
+                <div class="middle" style="width: 100%; max-width: 100%;">
+                    <div class="text">
+                        <p>You can pay with Credit Card</p>
+                        <a href="{% url 'accounts' option='allaccounts' %}">Browse Games</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+<div class="section_title_main">
+    <div class="box">
+        <h3>Trending Products</h3>
+        <p>See The Trending Products On Our Site.</p>
+    </div>
+</div>
+<div class="trending_products">
+    <div class="box">
+        <div class="arrow left_arrow">
+            <i class="bi bi-arrow-left"></i>
+        </div>
+        <section class="products prod_1">
+            {% for i in trending_acc %}
+                <div class="product_body">
+                    <img src="{{ i.account_img.url }}">
+                    <p class="product_title"> {{ i.title }} </p>
+                    <p class="product_options">{{ i.options }}</p>
+                    <p class="product_price">{{ i.price }}$</p>
+                    <a href="{% url 'account'  acc_id=i.id %}">View Product</a>
+                </div>
+            {% endfor %}
+        </section>
+        <div class="arrow right_arrow">
+            <i class="bi bi-arrow-right"></i>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="deals">
+    <div class="box">
+
+
+        <div class="deal">
+            <div class="section_title_1">
+                <div class="box">
+                    <h3>Best Seller</h3>
+                    <p>See The Best Seller Products On Our Site.</p>
+                </div>
+            </div>
+            {% for i in trending_acc %}
+                <div class="game_info_2">
+                    <img src="{{ i.account_img.url }}">
+                    <div class="game_details">
+                        <p class="product_title">{{ i.title }}</p>
+                        <p class="product_options">{{ i.options }}</p>
+                        <p class="product_price">{{ i.price }}$</p>
+                        <a href="{% url 'account'  acc_id=i.id %}">View Product</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+
+        <div class="deal">
+            <div class="section_title_1">
+                <div class="box">
+                    <h3>cheapest products</h3>
+                    <p>See The cheapest products On Our Site.</p>
+                </div>
+            </div>
+            {% for i in cheapest_product %}
+                <div class="game_info_2">
+                    <img src="{{ i.account_img.url }}">
+                    <div class="game_details">
+                        <p class="product_title">{{ i.title }}</p>
+                        <p class="product_options">{{ i.options }}</p>
+                        <p class="product_price">{{ i.price }}$</p>
+                        <a href="{% url 'account'  acc_id=i.id %}">View Product</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+
+        <div class="deal">
+            <div class="section_title_1">
+                <div class="box">
+                    <h3>Latest releases</h3>
+                    <p>See The Latest releases Products On Our Site.</p>
+                </div>
+            </div>
+            {% for i in latest_released %}
+                <div class="game_info_2">
+                    <img src="{{ i.account_img.url }}">
+                    <div class="game_details">
+                        <p class="product_title">{{ i.title }}</p>
+                        <p class="product_options">{{ i.options }}</p>
+                        <p class="product_price">{{ i.price }}$</p>
+                        <a href="{% url 'account'  acc_id=i.id %}">View Product</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+<div class="section_title_main">
+    <div class="box">
+        <h3>PlayStation Bestsellers</h3>
+        <p>See The PlayStation Bestsellers On Our Site.</p>
+    </div>
+</div>
+
+<div class="trending_products">
+    <div class="box">
+        <div class="arrow left_arrow">
+            <i class="bi bi-arrow-left"></i>
+        </div>
+        <section class="products prod_1">
+            {% for i in Playstation_bestseller %}
+                <div class="product_body">
+                    <img src="{{ i.account_img.url }}">
+                    <p class="product_title">{{ i.title }}</p>
+                    <p class="product_options">{{ i.options }}</p>
+                    <p class="product_price">{{ i.price }}$</p>
+                    <a href="{% url 'account'  acc_id=i.id %}">View Product</a>
+                </div>
+            {% endfor %}
+        </section>
+        <div class="arrow right_arrow">
+            <i class="bi bi-arrow-right"></i>
+        </div>
+    </div>
+</div>
+
+<div class="section_title_1">
+    <div class="box">
+        <h3>Cheap Products</h3>
+        <p>See The Cheapest Products starting from 1 dollar On Our Site.</p>
+    </div>
+</div>
+<div class="cheapest_products">
+    <div class="box">
+        <div class="price_starting">
+            <h3><a href="{% url 'accounts' option='to1' %}">up  To 1 Dollar</a></h3>
+        </div>
+        <div class="price_starting">
+            <h3><a href="{% url 'accounts' option='to2' %}">up  To 2 Dollar</a></h3>
+        </div>
+        <div class="price_starting">
+            <h3><a href="{% url 'accounts' option='to5' %}">up  To 5 Dollar</a></h3>
+        </div>
+        <div class="price_starting">
+            <h3><a href="{% url 'accounts' option='to10' %}">up  To 10 Dollar</a></h3>
+        </div>
+        <div class="price_starting">
+            <h3><a href="{% url 'accounts' option='to20' %}">up  To 20 Dollar</a></h3>
+        </div>
+        <div class="price_starting">
+            <h3><a href="{% url 'accounts' option='to30' %}">up  To 30 Dollar</a></h3>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
