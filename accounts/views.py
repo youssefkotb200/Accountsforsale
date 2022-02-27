@@ -12,9 +12,9 @@ from django.db.models import Q
 
 def account(request, acc_id):
     if request.method == 'GET':
-        account = Accounts.objects.filter(is_avalabile='true', pk=acc_id).all()
+        account = Accounts.objects.filter(is_avalabile=True, pk=acc_id).all()
         category = Categories.objects.get(slug=account[0].category.slug)
-        equivalent = Accounts.objects.filter(is_avalabile='true', category=category).all()[:8]
+        equivalent = Accounts.objects.filter(is_avalabile=True, category=category).all()[:8]
         if request.user.is_authenticated:
             in_cart = CartItem.objects.filter(Q(account_id=account[0]) & Q(user_id=request.user)).exists()
         else:
@@ -31,9 +31,9 @@ KeyWord_main = ''
 
 def accounts(request, option):
     if option[0:2] == 'to':
-        accounts = Accounts.objects.filter(is_avalabile='true', price__lte=int(option[2:len(option)])).all()
+        accounts = Accounts.objects.filter(is_avalabile=True, price__lte=int(option[2:len(option)])).all()
     else:
-        accounts = Accounts.objects.filter(is_avalabile='true').all()
+        accounts = Accounts.objects.filter(is_avalabile=True).all()
     accounts_count = accounts.count()
     accounts = sort_by(request, accounts)
     return render(request, "accounts/accounts.html", {
@@ -44,7 +44,7 @@ def accounts(request, option):
 
 def account_categories(request, slug_name):
     category = get_object_or_404(Categories, slug=slug_name)
-    accounts = Accounts.objects.filter(is_avalabile='true', category=category).all()
+    accounts = Accounts.objects.filter(is_avalabile=True, category=category).all()
     accounts_count = accounts.count()
     accounts = sort_by(request, accounts)
     return render(request, "accounts/accounts.html", {
@@ -60,7 +60,7 @@ def search(request):
         keyword = request.GET['Keyword']
         if keyword:
             KeyWord_main = keyword
-    accounts = Accounts.objects.filter(Q(is_avalabile='true') & Q(Q(title__icontains=KeyWord_main) | Q(category__name__icontains=KeyWord_main))).all()
+    accounts = Accounts.objects.filter(Q(is_avalabile=True) & Q(Q(title__icontains=KeyWord_main) | Q(category__name__icontains=KeyWord_main))).all()
     accounts_count = accounts.count()
     accounts = sort_by(request, accounts)
     return render(request, "accounts/accounts.html", {
@@ -72,7 +72,7 @@ def search(request):
 
 
 def pagination(page_number, accounts):
-    paginator = Paginator(accounts, 6)
+    paginator = Paginator(accounts, 3)
     page_obj = paginator.get_page(page_number)
     return page_obj
 

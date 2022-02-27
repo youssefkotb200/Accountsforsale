@@ -16,18 +16,24 @@
                     <div class="item_info">
                         <p>{{ i.account_id.title}}</p>
                         <p><strong>Price:</strong>{{ i.account_id.price }}$</p>
+                        <p><strong>Platform:</strong>{{ i.account_id.platform }}</p>
                     </div>
-                    <a href="{% url 'remove_from_cart' account_id=i.account_id.pk %}" class="btn btn-danger" >Remove</a> 
+                    <div class="cart_bttns">
+                        <a href="{% url 'remove_from_cart' account_id=i.account_id.pk %}" class="btn btn-danger" >Remove</a> 
+                        <a href="{% url 'account' acc_id=i.account_id.pk %}"  class="btn btn-primary" >View details</a> 
+                    </div>
                 </div>
             {% endfor %}
         </div>
         <div class="checkout">
-            <p><strong>Total price:</strong> {{ Total_price }}$</p>
-            <p><strong>Tax:</strong> {{ tax }}$</p>
-            <p><strong>Grand Total:</strong> {{ Grand_total }}$</p>
+            <p class="checkout_info"><strong>Total price:</strong> {{ Total_price }}$</p>
+            <p class="checkout_info"><strong>Tax:</strong> {{ tax }}$</p>
+            <p class="checkout_info"><strong>Grand Total:</strong> {{ Grand_total }}$</p>
             <img src="../../../media/images/payments.png">
-            <a class="btn btn-primary" href="{% url 'checkout' %}">Check out</a>
-            <a class="btn btn-light" href="{% url 'accounts' option='allaccounts' %}">Continue Shopping</a>
+            {% if count > 0 %}
+                <a class="btn btn-primary" href="{% url 'checkout' %}">Check out</a>
+            {% endif %}
+            <a class="continue-shopping" href="{% url 'accounts' option='allaccounts' %}">Continue Shopping</a>
         </div>
     </div>
 </div>

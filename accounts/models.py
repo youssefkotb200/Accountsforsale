@@ -18,10 +18,11 @@ class Accounts(models.Model):
     price = models.IntegerField()
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     options = models.CharField(max_length=30)
-    email = models.CharField(max_length=200)
-    password = models.CharField(max_length=200)
+    email = models.CharField(max_length=200, unique=True)
+    password = models.CharField(max_length=200, unique=True)
     category = models.ForeignKey(Categories, on_delete=models.CASCADE)
-    is_avalabile = models.CharField(max_length=20, default="true")
+    is_avalabile = models.BooleanField(max_length=20, default=True)
+    platform = models.CharField(max_length=20)
 
     class Meta:
         verbose_name = 'Accounts'

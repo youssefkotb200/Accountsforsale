@@ -1,0 +1,36 @@
+{% extends 'dashboard/dashboard_base.html' %}
+{% block dashboard_info %}
+    <div class="cartitems" style="width: 100%;max-width:100%;">
+        {% for i in page_obj %}
+            <div class="cartitem" style="width: 100%;max-width:100%;">
+                <img src="{{ i.account_img.url }}">
+                <div class="item_info_1">
+                    <p>{{ i.account.title}}</p>
+                    <div class="purchase_info" style="display: block;">
+                        <p><strong>Price:</strong>{{ i.price }}$</p>
+                        <p><strong>Platform:</strong>{{ i.platform }}</p>
+                        {% if i.is_avalabile %}
+                            <p><strong>Satus:</strong>Not Sold</p>
+                        {% else %}
+                            <p><strong>Satus:</strong>Sold</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
+{% block any %}
+    <nav aria-label="Page navigation example" style="display: flex; justify-content: flex-end; margin: 30px 50px 10px 10px;">
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}">Previous</a></li>
+            {% endif %}
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.number }}"> {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</a></li>
+            {% if page_obj.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number }}">Next</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endblock %}

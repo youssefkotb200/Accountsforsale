@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block scripts %}
+    <link rel="stylesheet" href="{% static 'cart/cart.css' %}">
+{% endblock %}
+{% block body %}
+<div class="box">
+    <h3 class="cart_title">Purchase Completed</h3>
+    <p>Thank you for your order if you want to see all your orders please visit <a href="{% url 'dashboard' %}">Dashboard</a></p>
+</div>
+<div class="cart">
+    <div class="box">
+        <div class="cartitems">
+            {% for i in orderproducts %}
+                <div class="cartitem" style="height:240px; max-height: 240px;">
+                    <img src="{{ i.account.account_img.url }}">
+                    <div class="item_info_1">
+                        <p>{{ i.account.title}}</p>
+                        <div class="purchase_info">
+                            <p><strong>Price:</strong>{{ i.account.price }}$</p>
+                            <p><strong>Platform:</strong>{{ i.account.platform }}</p>
+                            <h3>Account Credintials</h3>
+                            <p><strong>Email:</strong>{{ i.account.email }}</p>
+                            <p><strong>Passowrd:</strong>{{ i.account.password }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="checkout">
+            <p><strong>Total price:</strong> {{ Total_price }}$</p>
+            <p><strong>Tax:</strong> {{ tax }}$</p>
+            <p><strong>Grand Total:</strong> {{ Grand_total }}$</p>
+            <img src="../../../media/images/payments.png">
+            {% if count > 0 %}
+                <a class="btn btn-primary" href="{% url 'checkout' %}">Check out</a>
+            {% endif %}
+            <a class="continue-shopping" href="{% url 'accounts' option='allaccounts' %}">Continue Shopping</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

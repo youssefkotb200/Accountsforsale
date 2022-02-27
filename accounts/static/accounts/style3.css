@@ -60,10 +60,10 @@
     flex-wrap: wrap;
 }
 .accounts_info .account .account_body {
-    max-height: 350px;
+    max-height: 315px;
     width: 32%;
     max-width: 32%;
-    height: 350px;
+    height: 315px;
     padding: 10px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     margin-top: 20px;
@@ -76,8 +76,8 @@
 }
 
 .account .account_body img {
-    max-height: 60%;
-    height: 60%;
+    max-height: 40%;
+    height: 40%;
     width: 100%;
     max-width: 100%;
 }

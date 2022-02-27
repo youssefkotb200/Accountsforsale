@@ -14,7 +14,7 @@
         <div class="game_part_1">
             <h2 class="game_title_1">{{ account.0.title }}</h2>
             <div class="sell_options_1">
-                <p><strong>Platform:</strong> {{account.0.category}} </p>
+                <p><strong>Platform:</strong> {{account.0.platform}} </p>
                 <p><strong>Selling Options:</strong> {{ account.0.options }}</p>
                 <p><strong>Type:</strong> Account</p>
             </div>
@@ -47,8 +47,8 @@
 
 
 
-<div class="accounts_info">
-    <div class="box">
+<div class="accounts_info" style="width: 100%;">
+    <div class="box" style="width: 100%;">
         <div class="account" style="width: 100%;">
             {% for game in equivalent_games %}
                 <div class="account_body" style="width: 25%;">

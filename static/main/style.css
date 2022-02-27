@@ -70,13 +70,13 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 300px
 }
 .user .nav_bar_icon_url {
     font-size: 18px;
     color: white;
     text-decoration: none;
     width: 40px;
+    margin: 0 10px 0 10px;
 }
 .cart_icon {
     position: relative;
@@ -93,7 +93,7 @@ header {
 .login_options a {
     color: white;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 15px;
 }
 strong {
     color: white;

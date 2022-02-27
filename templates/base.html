@@ -42,6 +42,9 @@
                         </button>
                     </form>
                     <div class="user">
+                        {% if request.user.is_authenticated %}
+                            <p style="color: white;font-weight: 500;margin-bottom:0px;">My wallet: {{request.user.wallet}}$</p>
+                        {% endif %}
                         <a class="nav_bar_icon_url" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {% if request.user.avatar %}
                                 <img class="navbar_icon" style="max-width:100%;border-radius: 50%;" src="{{ request.user.avatar.url }}">

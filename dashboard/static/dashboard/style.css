@@ -1,0 +1,32 @@
+.dashboard .box {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+.dashboard .box .list-group {
+    width: 30%;
+}
+.dashboard .box .dashboard_info {
+    width: 68%;
+}
+
+.profile_info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 400px;
+    margin-bottom: 20px;
+}
+.profile_info img {
+    width: 26%;
+}
+.profile_info p{
+    font-size: 20px;
+}
+.profile_info_2 {
+    display: flex;
+    flex-wrap: wrap;
+}
+.profile_info_2 p {
+    width: 40%;
+}

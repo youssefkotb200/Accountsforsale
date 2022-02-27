@@ -27,17 +27,17 @@ from django.core.mail import EmailMessage
 from cart.views import get_session
 # Create your views here.
 from cart.models import CartItem, Cart
-
+import requests
 # .order_by('-creation_date')[:1]
 
 
 def index(request):
     if request.method == 'GET':
-        accounts = Accounts.objects.all()[:5]
+        accounts = Accounts.objects.filter(is_avalabile=True).all()[:6]
         latest_released =  reversed(accounts)
-        cheapest_product = Accounts.objects.all().order_by('price')[:5]
+        cheapest_product = Accounts.objects.filter(is_avalabile=True).all().order_by('price')[:6]
         play_cat = Categories.objects.get(slug="psn")
-        playstation = Accounts.objects.filter(category=play_cat).all()
+        playstation = Accounts.objects.filter(is_avalabile=True, category=play_cat).all()
         return render(request, "app/index.html", {
             "trending_acc": accounts,
             "latest_released": latest_released,
@@ -75,7 +75,16 @@ def login_view(request):
                 cart.delete()
             auth.login(request, user)
             messages.success(request, 'Loged in')
-            return HttpResponseRedirect(reverse("index"))
+            url = request.META.get('HTTP_REFERER')
+            try:
+                query = requests.utils.urlparse(url).query
+                # next=/cart/checkout/
+                params = dict(x.split('=') for x in query.split('&'))
+                if 'next' in params:
+                    nextPage = params['next']
+                    return redirect(nextPage)                
+            except:
+                return HttpResponseRedirect(reverse('index'))
         else:
             messages.error(request, "username or password are wrong")
             return HttpResponseRedirect(reverse('login_view'))
@@ -149,10 +158,6 @@ def activate(request, uidb64, token):
         messages.error(request, 'Invalid activation link')
         return redirect('register')
 
-
-@login_required
-def dashboard(request):
-    return render(request,"app/dashboard.html")
 
 
 def forgotpassword(request):

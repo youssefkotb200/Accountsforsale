@@ -4,7 +4,31 @@
     <link rel="stylesheet" href="{% static 'cart/cart.css' %}">
 {% endblock %}
 {% block body %}
-<div class="box">
-    <h3 class="cart_title">Accounts</h3>
+<div class="place_order_box">
+    <div class="box">
+        <div class="place_order">
+            <h3 class="cart_title">My Purchases</h3>
+            {% for i in cartitems %}
+                <div class="cartitem">
+                    <img src="{{ i.account_id.account_img.url }}">
+                    <div class="item_info">
+                        <p>{{ i.account_id.title}}</p>
+                        <p><strong>Price:</strong>{{ i.account_id.price }}$</p>
+                        <p><strong>Platform:</strong>{{ i.account_id.platform }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="order_details">
+                <p><strong>Total price:</strong> {{ Total_price }}$</p>
+                <p><strong>Tax:</strong> {{ tax }}$</p>
+                <p><strong>Grand Total:</strong> {{ Grand_total }}$</p>
+                <form action="{% url 'checkout' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" value="Place Order" class="place_order_button btn btn-primary">
+                </form>
+
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

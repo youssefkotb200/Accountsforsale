@@ -49,6 +49,7 @@ class User(AbstractBaseUser):
     email           = models.EmailField(max_length=100, unique=True)
     phone_number    = models.IntegerField(unique=True, null=True, blank=True)
     avatar          = models.ImageField(null=True, blank=True, upload_to="user_avatar/")
+    wallet          = models.IntegerField(default=0)
 
     # required
     date_joined     = models.DateTimeField(auto_now_add=True)

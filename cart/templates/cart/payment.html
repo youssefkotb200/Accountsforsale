@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block scripts %}
+    <link rel="stylesheet" href="{% static 'cart/cart.css' %}">
+{% endblock %}
+{% block body %}
+<div class="box">
+    <h3 class="cart_title">Payment</h3>
+</div>
+<div class="cart">
+    <div class="box">
+        <div class="cartitems">
+            {% for i in cartitems %}
+                <div class="cartitem">
+                    <img src="{{ i.account_id.account_img.url }}">
+                    <div class="item_info">
+                        <p>{{ i.account_id.title}}</p>
+                        <p><strong>Price:</strong>{{ i.account_id.price }}$</p>
+                        <p><strong>Price:</strong>{{ i.account_id.platform }}$</p>
+
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="checkout" style="height:auto;">
+            <p><strong>Total price:</strong> {{ Total_price }}$</p>
+            <p><strong>Tax:</strong> {{ tax }}$</p>
+            <p><strong>Grand Total:</strong> {{ Grand_total }}$</p>
+            <p style="font-size: 20px; font-weight: 600;">Pay with:</p>
+            <div id="paypal-button-container"></div>
+        </div>
+    </div>
+</div>
+  <!-- Include the PayPal JavaScript SDK -->
+  <script src="https://www.paypal.com/sdk/js?client-id=Ac90EQ8KDhU_KZ_4p1iNf5KEiVx1e_ixqGPeQ5QiaZo24qRKuLVqe8ajXHSX0tt_mi743TGOD-E0-d_5&currency=USD"></script>
+
+<script>
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    var csrftoken = getCookie('csrftoken');
+    var order_number = "{{order.order_number}}"
+    var amount = "{{ Grand_total }}"
+    var url = "{% url 'payment' %}"
+    var payment_method = 'PayPal'
+    // var redirect_url = "{% url 'order_completed' order_number=order.order_number %}"
+    // Render the PayPal button into #paypal-button-container
+    paypal.Buttons({
+
+        // Set up the transaction
+        createOrder: function(data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: amount
+                    }
+                }]
+            });
+        },
+
+        // Finalize the transaction
+        onApprove: function(data, actions) {
+            return actions.order.capture().then(function(orderData) {
+                sendData();
+                function sendData(){
+                    fetch(url, {
+                        method : "POST",
+                        headers: {
+                            "Content-type": "application/json",
+                            "X-CSRFToken": csrftoken,
+                        },
+                        body: JSON.stringify({
+                            orderID: order_number,
+                            transID: orderData.id,
+                            payment_method: payment_method,
+                            status: orderData.status,
+                        }),
+                    })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log('okay')
+                        window.location.href = window.location.origin + '/cart/' + 'order_completed/' + order_number
+                    });
+                }
+            });
+    }
+
+
+    }).render('#paypal-button-container');
+</script>
+{% endblock %}

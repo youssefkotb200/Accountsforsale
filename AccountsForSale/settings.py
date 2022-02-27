@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'dashboard'
 ]
 
 MIDDLEWARE = [
@@ -132,6 +133,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "app/static/"),
     os.path.join(BASE_DIR, "accounts/static/"),
     os.path.join(BASE_DIR, "cart/static/"),
+    os.path.join(BASE_DIR, "dashboard/static/"),
 ]
 
 # LOGIN_URL='/login'

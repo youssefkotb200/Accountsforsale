@@ -1,0 +1,28 @@
+
+{% extends 'dashboard/dashboard_base.html' %}
+{% block dashboard_info %}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Order Number</th>
+                <th scope="col">payment method</th>
+                <th scope="col">Order Total</th>
+                <th scope="col">Order Tax</th>
+                <th scope="col">created_at</th>                  
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in orders %}
+                <tr>
+                    <td><a href="{% url 'order' order_number=i.order_number %}">{{ i.order_number }}</a></td>
+                    <td>{{ i.order_number }}</td>
+                    <td>{{ i.order_total }}$</td>
+                    <td>{{ i.tax }}$</td>
+                    <td>{{ i.created_at }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+{% block any %}
+{% endblock %}
