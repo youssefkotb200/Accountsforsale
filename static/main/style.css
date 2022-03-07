@@ -32,6 +32,7 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 20px 30px 20px 30px;
+    flex-wrap: wrap;
 }
 .logo {
     font-size: 40px;
@@ -45,6 +46,11 @@ header {
 }
 .logo .third {
     color: var(--main);
+}
+#wallet {
+    color: white;
+    font-weight: 500;
+    margin-bottom:0px;
 }
 .search {
     height: 50px;
@@ -174,3 +180,106 @@ strong {
     color: white;
 }
 /* end header */
+
+
+
+/* media query */
+@media( max-width: 1050px) {
+    .logo {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .nav-bar .box {
+        height: auto;
+        flex-wrap: wrap;
+    }
+    .nav-bar .box .option {
+        height: 45px;
+        margin-top: 10px;
+    }
+}
+@media( max-width: 926px) {
+    .search {
+        width: 100%;
+    }
+    .user {
+        width: 100%;
+        margin-top: 30px;
+        justify-content: none;
+    }
+    .user .nav_bar_icon_url {
+        margin: 0 30px 0 30px;
+
+    }
+    #wallet {
+        display: none;
+    }
+    #login {
+        display: none;
+    }
+}
+
+/* form  */
+/* The popup form - hidden by default */
+.form-popup {
+
+    display: none;
+    justify-content: center;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+    transition: 1s;
+    transform-origin: top center;
+    animation: scaleZ 500ms ease-in-out forwards;
+}
+@keyframes scaleZ {
+    0% {
+        transform: scaleY(0)
+    }
+    80% {
+        transform: scaleY(1.1)
+    }
+    100% {
+        transform: scaleY(1)
+    }
+  }
+  
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 500px;
+  padding: 10px;
+  background-color: white;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+.selling_form {
+    width: 30%;
+    margin: 0 35% 20px 35%;
+}
+.form-popup .btn {
+    display: block;
+    width: 40%;
+    margin: 0 30% 20px 30%;
+}

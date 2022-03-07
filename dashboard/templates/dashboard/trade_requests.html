@@ -1,0 +1,108 @@
+{% extends 'dashboard/dashboard_base.html' %}
+{% load static %}
+{% block dashboard_info %}
+<div class="cartitems" style="width: 100%;max-width:100%;">
+    {% for i in trade_requests %}
+        <div class="trade_accounts">
+
+            {% if request.user == i.account_owner %}
+
+                <div class="account_div">
+                    <h2>My account</h2>
+                    <img src="{{ i.account_img.url }}">
+                    <div class="item_info_1">
+                        <p>{{ i.account_title}}</p>
+                        <div class="purchase_info" style="display: block; width:340px;">
+                            <p><strong>Platform:</strong>{{ i.account_platform }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="account_div">
+                    <h2>Trade account</h2>
+                    <img src="{{ i.trade_account.account_img.url }}">
+                    <div class="item_info_1">
+                        <p>{{ i.trade_account.title}}</p>
+                        <div class="purchase_info" style="display: block; width:340px;">
+                            <p><strong>Platform:</strong>{{ i.trade_account.platform }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                {% if not i.completed %}
+                    <h2>The trade account owner recived  your request, when he responds we will contact you on your email</h2>
+                {% else %}
+                    {% if i.answer%}
+                        <h2> Trade account owner Accepted your Request</h2>
+                        <div>
+                            <p><strong>email:</strong>{{ i.trade_account.email }}</p>
+                            <p><strong>password:</strong>{{ i.trade_account.password }}</p>
+                        </div>
+                    {% else %}
+                        <h2> Trade account owner declined your Request</h2>
+                    {% endif %}
+                {% endif %}
+
+
+            {% else %}
+
+                <div class="account_div">
+                    <h2>My account</h2>
+                    <img src="{{ i.trade_account.account_img.url }}">
+                    <div class="item_info_1">
+                        <p>{{ i.trade_account.title}}</p>
+                        <div class="purchase_info" style="display: block; width:340px;">
+                            <p><strong>Platform:</strong>{{ i.trade_account.platform }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="account_div">
+                    <h2>Trade account</h2>
+                    <img src="{{ i.account_img.url }}">
+                    <div class="item_info_1">
+                        <p>{{ i.account_title}}</p>
+                        <div class="purchase_info" style="display: block; width:340px;">
+                            <p><strong>Platform:</strong>{{ i.account_platform }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                    {% if not i.completed %}
+                        <div class="bttn-group-trade" style="width: 100%;">
+                            <a href="{% url 'accept_trade' trade_id=i.pk %}" class="btn btn-primary">Accept</a>
+                            <a href="{% url 'decline_trade' trade_id=i.pk %}" class="btn btn-danger">Decline</a>
+                        </div>
+                    {% else %}
+                        {% if i.answer%}
+                            <h2 style="width: 100%"> You Accepted The Request</h2>
+                            <div>
+                                <p><strong>email:</strong>{{ i.account_email }}</p>
+                                <p><strong>password:</strong>{{ i.account_password }}</p>
+                            </div>
+                        {% else %}
+                            <h2> You declined The Request</h2>
+                        {% endif %}
+                    {% endif %}
+
+
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+
+{% block any %}
+    <nav aria-label="Page navigation example" style="display: flex; justify-content: flex-end; margin: 30px 50px 10px 10px;">
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}">Previous</a></li>
+            {% endif %}
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.number }}"> {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</a></li>
+            {% if page_obj.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number }}">Next</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endblock %}

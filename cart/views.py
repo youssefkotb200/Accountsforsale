@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from .models import *
-from accounts.models import Accounts 
+from accounts.models import Accounts, Review
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
@@ -11,6 +11,9 @@ import json
 import datetime
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
+from django.contrib import messages, auth
+
+
 
 # Create your views here.
 
@@ -156,6 +159,17 @@ def payment(request):
         account = Accounts.objects.get(id=item.account_id.id)
         account.is_avalabile = False
         account.save()
+        user = User.objects.get(pk=item.account_id.owner.id)
+        mail_subject = 'Your Account have been sold'
+        message = render_to_string('cart/account_sold.html', {
+            'user': user,
+            'account': item.account_id,
+        })
+        to_email = user.email
+        send_email = EmailMessage(mail_subject, message, to=[to_email])
+        send_email.send()
+        user.wallet += item.account_id.price
+        user.save()
 
     # Clear cart
     CartItem.objects.filter(user_id=request.user).delete()
@@ -177,32 +191,41 @@ def payment(request):
 
 @login_required
 def order_completed(request, order_number):
-    order = Order.objects.get(user=request.user, is_ordered=True, order_number=order_number)
-    orderproducts = OrderProduct.objects.filter(order=order).all()
     Total_price = 0
     tax = 0
     Grand_total = 0
+    order = Order.objects.get(user=request.user, is_ordered=True, order_number=order_number)
+    orderproducts = OrderProduct.objects.filter(order=order).all()
+    sellers = []
     for i in orderproducts:
         Total_price += i.account.price
-        user = User.objects.get(pk=i.account.owner.id)
-        user.wallet += i.account.price
-        user.save()
-        mail_subject = 'Your Account have been sold'
-        message = render_to_string('cart/account_sold.html', {
-            'user': user,
-            'account': i.account,
-        })
-        to_email = user.email
-        send_email = EmailMessage(mail_subject, message, to=[to_email])
-        send_email.send()
-
-
+        review = Review.objects.filter(Q(seller_id=i.account.owner) & Q(review_owner=request.user)).all()
+        if i.account.owner not in sellers and not review:
+            sellers.append(i.account.owner)
     tax = Total_price * 0.05
     Grand_total = Total_price + tax
+    if request.method == 'POST':
+        rating = request.POST['rating']
+        if rating:
+            rating = rating.split('-')
+            seller = User.objects.get(pk=rating[1])
+            review = Review.objects.create(
+                seller_id=seller,
+                review_owner=request.user,
+                stars_review=rating[0],
+            )
+            review.save()
+            messages.success(request, 'Thank you for your review')
+            return redirect('/cart/order_completed/' + order_number )
+        else:
+            pass
     return render(request, "cart/order_completed.html", {
         "order": order,
         "orderproducts": orderproducts,
         'Total_price': Total_price,
         'tax': tax,
         'Grand_total': Grand_total,
+        'sellers': sellers,
+        'seller_len': len(sellers)
     })
+

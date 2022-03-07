@@ -1,0 +1,25 @@
+/* start base template */
+@media( max-width: 926px) {
+    .search {
+        width: 100%;
+    }
+    .user {
+        width: 100%;
+        margin-top: 30px;
+        justify-content: none;
+    }
+    .user .nav_bar_icon_url {
+        margin: 0 30px 0 30px;
+
+    }
+    #wallet {
+        display: none;
+    }
+    #login {
+        display: none;
+    }
+}
+/* end base template */
+/* start index */
+
+/* end index */

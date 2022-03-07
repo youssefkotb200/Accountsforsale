@@ -21,18 +21,56 @@
         </div>
         <div class="game_part_1">
             <div class="seller_info">
-                <img src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png">
+                {% if account.0.owner.avatar %}
+                    <img src="{{ account.0.owner.avatar.url }}">
+                {% else %}
+                    <img src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png">
+                {% endif %}
                 <p>{{ account.0.owner.username }}</p>
+                <p>Average Rating: {{ rating }}</p>
             </div>
             <p class="game_price_1"><strong>Price:</strong> <span>{{account.0.price}}$</span></p>
-            {% if In_cart %}
-                <a class="btn btn-success">Added To Cart</a>
-            {% else %}
-                <a href="{% url 'add_to_cart' account_id=account.0.pk %}" class="btn btn-primary">Add To Cart</a>
+            {% if account.0.owner.username != request.user.username %}
+                {% if account.0.options != 'trade-only' %}
+                    {% if In_cart %}
+                        <a class="btn btn-success">Added To Cart</a>
+                    {% else %}
+                        <a href="{% url 'add_to_cart' account_id=account.0.pk %}" class="btn btn-primary">Add To Cart</a>
+                    {% endif %}
+                {% endif %}
+                {% if account.0.options != 'sell-only' %}
+                    <button style="width: 100%; margin: 0 0 20px 0;" type="button" class="btn btn-primary selling_form" onclick="openForm()">Send Trade Request</button>
+                {% endif %}
             {% endif %}
-            {% if account.0.options != 'sell' %}
-                <a type="button" class="btn btn-primary">Send Trade Request</a>
-            {% endif %}
+            <div class="form-popup" id="myForm">
+                <form enctype="multipart/form-data" action="{% url 'trade_request' account_id=account.0.pk %}" class="form-container" method="post">
+                    {% csrf_token %}
+                    <h1>Send Trade Request</h1> 
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Accouunt email" name="email" aria-label="First name">
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Accouunt Password" name="password" aria-label="Last name">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Accouunt Title" name="title" aria-label="First name">
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Accouunt Platform" name="platform" aria-label="Last name">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input style="margin-top: 10px;margin-bottom: 20px;" type="file" accept="image/*,.jpg,.jpeg" class="form-control"  name="image" aria-label="Last name">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Request</button>
+                    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -51,15 +89,18 @@
     <div class="box" style="width: 100%;">
         <div class="account" style="width: 100%;">
             {% for game in equivalent_games %}
-                <div class="account_body" style="width: 25%;">
+                <div class="account_body responsive" style="width: 25%;">
                     <img src="{{ game.account_img.url }}">
                     <p>{{ game.title }}</p>
-                    <p>{{ game.price }}$</p>
                     <p>{{ game.options }}</p>
+                    <p>{{ game.platform }}</p>
+                    <p>{{ game.price }}$</p>
                     <a href="{% url 'account' acc_id=game.pk %}">View Product</a>
                 </div>
             {% endfor %}
         </div>
     </div>
 </div>
+<script src="{% static 'main/form.js' %}"></script>
+
 {% endblock %}

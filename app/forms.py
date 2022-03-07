@@ -33,10 +33,3 @@ class RegistrationForm(forms.ModelForm):
         self.fields['email'].widget.attrs['placeholder'] = 'Enter Email Address'
         for field in self.fields:
             self.fields[field].widget.attrs['class'] = 'form-control'
-    
-
-    def validation(self):
-        if self.password != self.confirm_password:
-            raise forms.ValidationError(
-                "Password does not match!"
-            )

@@ -1,12 +1,63 @@
 {% extends 'dashboard/dashboard_base.html' %}
+{% load static %}
 {% block dashboard_info %}
+<button type="button" class="btn btn-primary selling_form" onclick="openForm()">Add Account</button>
+<div class="form-popup" id="myForm">
+    <form action="{% url 'add_account' %}" enctype="multipart/form-data" class="form-container" method="post">
+      {% csrf_token %}
+      <h1>Add Account</h1> 
+  
+      <div class="row">
+        <div class="col">
+          <input type="text" class="form-control" placeholder="Accouunt email" name="email" aria-label="First name">
+        </div>
+        <div class="col">
+          <input type="text" class="form-control" placeholder="Accouunt Password" name="password" aria-label="Last name">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <input type="text" class="form-control" placeholder="Accouunt Price" name="price" aria-label="Last name">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+            <select class="form-select form-select-sm" name="category" aria-label=".form-select-sm example">
+                <option disabled selected>Category</option>
+                {% for category in categories %}
+                    <option value="{{ category.slug }}"> {{ category.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col">
+            <select class="form-select form-select-sm" name="options" aria-label=".form-select-sm example">
+                <option disabled selected>Selling options</option>
+                <option value="sell-only">Sell only</option>
+                <option value="trade-only">Trade only</option>
+                <option value="sell-trade">Sell& Trade</option>
+            </select>        
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <input type="text" class="form-control" placeholder="Accouunt Title" name="title" aria-label="First name">
+        </div>
+        <div class="col">
+          <input style="margin-top: 10px;" type="file" accept="image/*,.jpg,.jpeg" class="form-control"  name="image" aria-label="Last name">
+        </div>
+      </div>
+  
+      <button type="submit" class="btn btn-primary">Add Account</button>
+      <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+    </form>
+  </div>
     <div class="cartitems" style="width: 100%;max-width:100%;">
         {% for i in page_obj %}
             <div class="cartitem" style="width: 100%;max-width:100%;">
                 <img src="{{ i.account_img.url }}">
                 <div class="item_info_1">
                     <p>{{ i.account.title}}</p>
-                    <div class="purchase_info" style="display: block;">
+                    <div class="purchase_info" style="display: block; width:340px;">
                         <p><strong>Price:</strong>{{ i.price }}$</p>
                         <p><strong>Platform:</strong>{{ i.platform }}</p>
                         {% if i.is_avalabile %}
@@ -14,8 +65,16 @@
                         {% else %}
                             <p><strong>Satus:</strong>Sold</p>
                         {% endif %}
+                        {% if i.approved %}
+                          <p><strong>approved:</strong>Yes</p>
+                        {% else %}
+                            <p><strong>approved:</strong>Being reviewd</p>
+                        {% endif %}
                     </div>
                 </div>
+                {% if i.is_avalabile %}
+                  <a class="btn btn-danger" style="align-self: center;" href="{% url 'delete_account' acc_id=i.pk %}">Delete Account</a>
+                {% endif %}
             </div>
         {% endfor %}
     </div>
@@ -33,4 +92,5 @@
             {% endif %}
         </ul>
     </nav>
+    <script src="{% static 'main/form.js' %}"></script>
 {% endblock %}

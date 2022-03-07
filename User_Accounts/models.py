@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
-
 # Create your models here.
 
 class UserManager(BaseUserManager):
@@ -75,3 +74,4 @@ class User(AbstractBaseUser):
 
     def has_module_perms(self, add_label):
         return True
+    

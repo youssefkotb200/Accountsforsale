@@ -3,16 +3,17 @@
     display: flex;
     justify-content: space-between;
     margin-top: 30px;
+    flex-wrap: wrap;
 }
 .game .box .game_part_1 {
     max-width: 30%;
     max-height: 100%;
     width: 35%;
-    height: 400px;
+    height: auto;
 }
 .game .box .game_part_1 .game_img_1 {
     width: 100%;
-    height: 100%;
+    height: 60%;
     max-width: 100%;
     max-height: 100%;
     border-radius: 10px;
@@ -74,3 +75,24 @@
     display: block;
 }
 /* end game */
+@media(max-width:650px) {
+    .game .box .game_part_1 {
+        max-width: 100%;
+        min-width: 100%;
+        width: 100%;
+    }
+    .game .box .game_part_1 .game_title_1 {
+        text-align: center;
+    }
+    .game .box .game_part_1 .seller_info {
+        margin-top: 20px;
+    }
+    .game .box .game_part_1 .seller_info::before {
+        top: -35%;
+    }
+    .responsive {
+        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
+    }
+}

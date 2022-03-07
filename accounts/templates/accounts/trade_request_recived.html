@@ -1,0 +1,9 @@
+{% autoescape off %}
+
+Hi {{user.first_name}},
+
+You have recived a trade request from {{ request.user.first_name }},
+for {{ trade_account.title }}, and it is being reviwed now when we approve the account,
+visit your dashboard for more info.
+
+{% endautoescape %}

@@ -9,4 +9,5 @@ urlpatterns = [
     path('search/', views.search, name="search"),
     path('category/<str:slug_name>', views.account_categories, name="account_categories"),
     path('account/<int:acc_id>', views.account, name="account"),
+    path('trade_request/<str:account_id>', views.trade_request, name="trade_request")
 ]

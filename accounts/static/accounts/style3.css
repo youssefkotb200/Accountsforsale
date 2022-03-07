@@ -71,6 +71,24 @@
     transform: scale(.95);
 
 }
+@media(max-width:900px) {
+    .accounts_info .account .account_body {
+        width: 50%;
+        max-width: 50%;
+    }
+}
+@media(max-width:650px) {
+    .account {
+        width: 60%;
+    }
+    .accounts_info .account .account_body {
+        width: 100%;
+        max-width: 100%;
+    }
+    .sort {
+        width: 40%;
+    }
+}
 .account .account_body:hover {
     transform: scale(1);
 }

@@ -2,6 +2,8 @@
     display: flex;
     justify-content: space-between;
     margin-top: 30px;
+    flex-wrap: wrap;
+
 }
 .dashboard .box .list-group {
     width: 30%;
@@ -29,4 +31,65 @@
 }
 .profile_info_2 p {
     width: 40%;
+}
+.trade_accounts {
+    display: flex;
+    margin: 0 0 30px 0;
+    box-shadow: rgb(0 0 0 / 2%) 0px 1px 3px 0px, rgb(27 31 35 / 15%) 0px 0px 0px 1px;
+    padding: 10px 20px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.trade_accounts div {
+    width: 45%;
+}
+.trade_accounts div img {
+    max-width: 100%;
+    width: 100%;
+    max-height: 46%;
+    height: 46%;
+}
+
+.bttn-group-trade {
+    text-align: center;
+}
+
+.bttn-group-trade a {
+    width: 28%;
+    margin: 0 20px;
+}
+
+.account_div {
+    height: 400px;
+}
+@media(max-width: 650px) {
+    .dashboard .box .list-group {
+        width: 100%;
+        margin-bottom: 25px;
+
+    }
+    .dashboard .box .dashboard_info {
+        width: 100%;
+    }
+    .cartitem a {
+        align-self: center;
+        width: 50%;
+        margin: 0 25%;
+    }
+    .profile_info p {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .profile_info {
+        justify-content: normal;
+    }
+    .profile_info_2 p {
+        width: 49%;
+    }
+}
+@media(max-width:650px) {
+    .created_at {
+        display: none;
+    }
+      
 }

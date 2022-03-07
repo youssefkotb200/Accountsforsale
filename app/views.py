@@ -33,11 +33,11 @@ import requests
 
 def index(request):
     if request.method == 'GET':
-        accounts = Accounts.objects.filter(is_avalabile=True).all()[:6]
+        accounts = Accounts.objects.filter(is_avalabile=True, approved=True).all()[:6]
         latest_released =  reversed(accounts)
-        cheapest_product = Accounts.objects.filter(is_avalabile=True).all().order_by('price')[:6]
+        cheapest_product = Accounts.objects.filter(is_avalabile=True, approved=True).all().order_by('price')[:6]
         play_cat = Categories.objects.get(slug="psn")
-        playstation = Accounts.objects.filter(is_avalabile=True, category=play_cat).all()
+        playstation = Accounts.objects.filter(is_avalabile=True, category=play_cat, approved=True).all()
         return render(request, "app/index.html", {
             "trending_acc": accounts,
             "latest_released": latest_released,
@@ -104,8 +104,8 @@ def register(request):
             password = form.cleaned_data['password']
             username = email.split("@")[0]
             user = User.objects.create_user(first_name=first_name, last_name=last_name, email=email, username=username,phone_number=phone_number, password=password)
-            user.phone_number = phone_number
             user.save()
+            print('user saved')
             # USER ACTIVATION
             current_site = get_current_site(request)
             mail_subject = 'Please activate your account'

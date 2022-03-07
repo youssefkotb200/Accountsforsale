@@ -2,7 +2,7 @@
 {% block dashboard_info %}
     <div class="cartitems" style="width: 100%;max-width:100%;">
         {% for i in page_obj %}
-            <div class="cartitem" style="height:240px; max-height: 240px; width: 100%;max-width:100%;">
+            <div class="cartitem" style="height:auto; max-height: initial; width: 100%;max-width:100%;">
                 <img src="{{ i.account.account_img.url }}">
                 <div class="item_info_1">
                     <p>{{ i.account.title}}</p>
