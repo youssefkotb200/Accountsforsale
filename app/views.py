@@ -36,7 +36,7 @@ def index(request):
         accounts = Accounts.objects.filter(is_avalabile=True, approved=True).all()[:6]
         latest_released =  reversed(accounts)
         cheapest_product = Accounts.objects.filter(is_avalabile=True, approved=True).all().order_by('price')[:6]
-        play_cat = Categories.objects.get(slug="psn")
+        play_cat = Categories.objects.filter(slug="psn").all()
         playstation = Accounts.objects.filter(is_avalabile=True, category=play_cat, approved=True).all()
         return render(request, "app/index.html", {
             "trending_acc": accounts,
